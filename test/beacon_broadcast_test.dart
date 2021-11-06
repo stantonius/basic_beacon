@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:test/test.dart';
 
 void main() {
-  BeaconBroadcast beaconBroadcast;
+  late BeaconBroadcast beaconBroadcast;
 
   setUp(() {
     beaconBroadcast = BeaconBroadcast();
@@ -14,11 +14,11 @@ void main() {
       'pl.pszklarska.beaconbroadcast/beacon_state',
     );
 
-    methodChannel.setMockMethodCallHandler((MethodCall methodCall) async {
+    methodChannel.setMethodCallHandler((MethodCall methodCall) async {
       if (methodCall.method == 'start' || methodCall.method == 'stop') {
         return Future<void>.value();
       } else if (methodCall.method == 'isAdvertising') {
-        return Future<bool>.value(true);
+        return Future<void>.value(true);
       }
       return null;
     });
